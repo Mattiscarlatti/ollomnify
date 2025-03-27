@@ -80,10 +80,10 @@ const Mint = () => {
         <div className="p-10 w-full">
           <div className="flex flex-col items-center gap-3 sm:gap-6 lg:gap-8">
             <button className="btn btn-outline rounded-full bg-darkText text-slate-100 px-2 py-2 text-sm flex items-center border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative" onClick={() => dialogRef.current?.showModal()}>
-              Start Mint van deze Collectie (met onderstaande planten)
+              Initiate Mint of this Collection (with plants listed below)
             </button>
             <dialog ref={dialogRef} className="modal bg-white p-3 rounded border-[2px] border-black">
-              <h2 className="text-xl font-bold mb-4">Van toepassing op deze plantencollectie</h2>
+              <h2 className="text-xl font-bold mb-4">Applicable to this Plant Collection</h2>
               <form onSubmit={handleSubmit}>
               <label className="flex">
                   <input
@@ -93,7 +93,7 @@ const Mint = () => {
                     onChange={handleCheckboxChange}
                     className="mt-1 mr-2"
                   />
-                  Schoon stromend water aanwezig in de directe omgeving
+                  Clean running water available in the immediate vicinity
                 </label>
                 <label className="flex">
                   <input
@@ -103,7 +103,7 @@ const Mint = () => {
                     onChange={handleCheckboxChange}
                     className="mt-1 mr-2"
                   />
-                  Ten minste enkele kuubs kalksteen doorlopend aanwezig
+                  At least several cubic metres of limestone continuously present
                 </label>
                 <label className="flex">
                   <input
@@ -113,7 +113,7 @@ const Mint = () => {
                     onChange={handleCheckboxChange}
                     className="mt-1 mr-2"
                   />
-                  Ten minste enkele kuubs dood hout doorlopend aanwezig
+                  At least several cubic metres of dead wood continuously present
                 </label>
                 <label className="flex">
                   <input
@@ -123,7 +123,7 @@ const Mint = () => {
                     onChange={handleCheckboxChange}
                     className="mt-1 mr-2"
                   />
-                  Hele winter enkele kuubs dood plantenmateriaal aanwezig
+                  Several cubic meters of dead plant material present all winter
                 </label>
                 <label className="flex">
                   <input
@@ -133,7 +133,7 @@ const Mint = () => {
                     onChange={handleCheckboxChange}
                     className="mt-1 mr-2"
                   />
-                  Mul zandgrond in de directe omgeving
+                  Loose sandy soil in the immediate vicinity
                 </label>
                 <label className="flex">
                   <input
@@ -143,7 +143,7 @@ const Mint = () => {
                     onChange={handleCheckboxChange}
                     className="mt-1 mr-2"
                   />
-                  Zandwallen in de directe omgeving
+                  Sand banks in the immediate vicinity
                 </label>
                 <label className="flex">
                   <input
@@ -153,7 +153,7 @@ const Mint = () => {
                     onChange={handleCheckboxChange}
                     className="mt-1 mr-2"
                   />
-                  Onderhoud zonder chemische bestrijdingsmiddelen
+                  Maintenance without chemical pesticides
                 </label>
                 <label className="flex">
                   <input
@@ -163,7 +163,7 @@ const Mint = () => {
                     onChange={handleCheckboxChange}
                     className="mt-1 mr-2"
                   />
-                  Ontwormingsmiddelvrije veedieren in de directe omgeving
+                  Deworming-agent-free livestock in the immediate vicinity
                 </label>
                 <div className="mt-4 flex justify-end">
                   <button
@@ -171,10 +171,10 @@ const Mint = () => {
                     className="mr-2 btn btn-outline rounded-full bg-darkText text-slate-100 px-2 py-2 text-sm flex items-center border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative"
                     onClick={() => dialogRef.current?.close()}
                   >
-                    Sluit Venster
+                    Cancel and Close
                   </button>
                   <button type="submit" className="btn btn-outline rounded-full bg-darkText text-slate-100 px-2 py-2 text-sm flex items-center border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative">
-                    Mint Collectie
+                    Mint Collection
                   </button>
                 </div>
               </form>

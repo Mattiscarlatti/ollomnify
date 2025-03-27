@@ -10,21 +10,16 @@ import '@/app/css/styles.css';
 interface BannerProps {
     plantendata0: { 
          aantalPlantenSoorten: number;
-         aantalInheemseSoorten: number;
-         aantalBoomSoorten: number; 
+          aantalBoomSoorten: number; 
          aantalBoomSoorten25: number; 
          aantalEetbareSoorten: number; 
          aantalGroenblijvendeSoorten: number; 
-         aantalGevoeligeSoorten: number;
-         aantalKwetsbareSoorten: number;
-         aantalBedreigdeSoorten: number;
-         aantalErnstigBedreigdeSoorten: number;
          biodiversiteitsScore: number;
         };
   }
 
   const Banner2: React.FC<BannerProps> = ({ plantendata0 }) => {
-    const { aantalPlantenSoorten, aantalInheemseSoorten, aantalBoomSoorten, aantalBoomSoorten25, aantalEetbareSoorten, aantalGroenblijvendeSoorten, aantalGevoeligeSoorten, aantalKwetsbareSoorten, aantalBedreigdeSoorten, aantalErnstigBedreigdeSoorten } = plantendata0;
+    const { aantalPlantenSoorten, aantalBoomSoorten, aantalBoomSoorten25, aantalEetbareSoorten, aantalGroenblijvendeSoorten, } = plantendata0;
   return (
     <>
         <Swiper
@@ -38,22 +33,16 @@ interface BannerProps {
         loop={true}
         >
         <SwiperSlide>
-            <h1 className="text-3xl">biodiversiteitsscore: <span className="text-red-500">{plantendata0.biodiversiteitsScore}</span></h1>
+            <h1 className="text-3xl">biodiversityscore: <span className="text-red-500">{plantendata0.biodiversiteitsScore}</span></h1>
         </SwiperSlide>
         <SwiperSlide>
-            <h1 className="text-3xl">aantal plantensoorten: <span className="text-red-500">{plantendata0.aantalPlantenSoorten}</span></h1>
+            <h1 className="text-3xl">number of plant species: <span className="text-red-500">{plantendata0.aantalPlantenSoorten}</span></h1>
         </SwiperSlide>
         <SwiperSlide>
-            <h1 className="text-3xl">aantal inheemse soorten: <span className="text-red-500">{plantendata0.aantalInheemseSoorten}</span></h1>
+            <h1 className="text-3xl">number of edible species: <span className="text-red-500">{plantendata0.aantalEetbareSoorten}</span></h1>
         </SwiperSlide>
         <SwiperSlide>
-            <h1 className="text-3xl">aantal (ernstig) bedreigde soorten: <span className="text-red-500">{plantendata0.aantalBedreigdeSoorten + plantendata0.aantalErnstigBedreigdeSoorten}</span></h1>
-        </SwiperSlide>
-        <SwiperSlide>
-            <h1 className="text-3xl">aantal eetbare soorten: <span className="text-red-500">{plantendata0.aantalEetbareSoorten}</span></h1>
-        </SwiperSlide>
-        <SwiperSlide>
-            <h1 className="text-3xl">aantal boomsoorten met exemplaar ouder dan 25jaar: <span className="text-red-500">{plantendata0.aantalBoomSoorten25}</span></h1>
+            <h1 className="text-3xl">number of tree species with specimens at least 25 years old: <span className="text-red-500">{plantendata0.aantalBoomSoorten25}</span></h1>
         </SwiperSlide>
         </Swiper>
     </>

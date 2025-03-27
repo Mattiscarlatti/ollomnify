@@ -17,7 +17,7 @@ const Logo = () => {
         </div>
         <div className="pt-2 sm:pt-4">
           <h3 className="text-2xl sm:text-5xl font-semibold text-darkText hover:text-[#00b900] cursor-pointer duration-200">
-            Alomnify.nl
+            Ollomnify.io
           </h3>
         </div>
       </div>

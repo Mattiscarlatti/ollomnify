@@ -20,10 +20,10 @@ const WalletModal = () => {
     return (
       <div>
         <button
-          className="btn btn-outline rounded-full text-xs sm:text-sm hover:text-white flex items-center justify-center gap-x-1 sm:px-3 sm:py-1 relative"
+          className="btn btn-outline rounded-full text-xs sm:text-base hover:text-white flex items-center justify-center gap-x-1 sm:px-3 sm:py-1 relative"
           onClick={() => window.my_modal.showModal()}
         >
-          {isConnected ? "VERBONDEN" : "VERBIND"}
+          {isConnected ? "CONNECTED" : "CONNECT"}
         </button>
         <dialog id="my_modal" className="modal bg-black p-3 rounded border-[2px] border-gray-400 duration-200 relative">
           <form method="dialog" className="modal-box">
@@ -49,7 +49,7 @@ const WalletModal = () => {
             </div>
           </form>
           <form method="dialog" className="modal-backdrop text-center text-gray-200 p-4">
-            <button>Sluit Venster</button>
+            <button>Close Window</button>
           </form>
         </dialog>
       </div>

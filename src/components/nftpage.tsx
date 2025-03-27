@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import { useCardano } from "@cardano-foundation/cardano-connect-with-wallet";
 import { NetworkType } from "@cardano-foundation/cardano-connect-with-wallet-core";
 import { Emulator, Lucid } from "@lucid-evolution/lucid";
-import { ChartInheems } from "@/components/chartinheems";
-import { ChartBedreigd } from "@/components/chartbedreigd";
 import { ChartPlantTypen } from "@/components/chartplanttypen";
 import Banner2 from "@/components/banner2";
 import Container from "@/components/container";
@@ -39,29 +37,15 @@ function calculateFactorScore(records: Record<string, number>): number {
 
 const calculateRecordScore = (flora: Flora2): number => {
   let score = 1;
-  if (flora.latin_name.includes(" ca. 25")) {
+  if (flora.latin_name.includes(" more than 25")) {
     score *= 3;
   }
   if (
-    ["boom", "conife", "struik"].some((type) => flora.plant_type.includes(type))
+    ["tree", "shrub"].some((type) => flora.plant_type.includes(type))
   ) {
     score *= 3;
-  } else if (flora.plant_type.includes("meerjarig")) {
+  } else if (flora.plant_type.includes("perennial")) {
     score *= 1.5;
-  }
-  if (flora.ende_mic.includes("nl")) {
-    score *= 2.5;
-  }
-  if (flora.en_dangered.includes("niet")) {
-    score *= 1;
-  } else if (flora.en_dangered.includes("gevoelig")) {
-    score *= 1.5;
-  } else if (flora.en_dangered.includes("kwetsbaar")) {
-    score *= 2;
-  } else if (flora.en_dangered.includes("ernstig")) {
-    score *= 3;
-  } else if (flora.en_dangered.length > 1) {
-    score *= 2.5; 
   }
   return score;
 };
@@ -83,13 +67,6 @@ const NFTPage = () => {
   const [aantalGroen, setAantalGroen] = useState<number>();
   const [aantalEetbaar, setAantalEetbaar] = useState<number>();
   const [aantalType, setAantalType] = useState<{ name: string; value: number }[]>([]);
-  const [aantalInheems, setAantalInheems] = useState< { name: string; value: number}[]>([]);
-  const [aantalBedreigd, setAantalBedreigd] = useState< { name: string; value: number}[]>([])
-  const [aantalBedreigd2, setAantalBedreigd2] = useState<number>();
-  const [aantalErnstigB, setAantalErnstigB] = useState<number>();
-  const [aantalKwetsbaar, setAantalKwetsbaar] = useState<number>();
-  const [aantalGevoelig, setAantalGevoelig] = useState<number>();
-  const [aantalInh, setAantalInh] = useState<number>();
   const [error, setError] = useState('');
   const network = NetworkType.TESTNET;
   const { isConnected, usedAddresses, enabledWallet } = useCardano({
@@ -168,18 +145,13 @@ const NFTPage = () => {
         console.log(recordsum);
         const aantalplanten = jsonObject.length;
         setAantal(aantalplanten);
-        const aantalboom = jsonObject.filter(obj => obj.plant_type === " boom");
-        const aantalfruitboom = jsonObject.filter(obj => obj.plant_type === " fruitboom");
-        const aantalconiferen = jsonObject.filter(obj => obj.plant_type === " coniferen");
-        const aantalboo = aantalboom.length;
-        const aantalfrui = aantalfruitboom.length;
-        const aantalcon = aantalconiferen.length;
-        const aantalBom = aantalboo + aantalfrui + aantalcon;
+        const aantalboom = jsonObject.filter(obj => obj.plant_type === " tree");
+        const aantalBom = aantalboom.length;
         setAantalBomen(aantalBom);
-        const aantalBom25 = jsonObject.filter(obj => obj.latin_name.includes(" ca. 25"));
+        const aantalBom25 = jsonObject.filter(obj => obj.latin_name.includes(" more than 25"));
         const aantalB25 = aantalBom25.length;
         setAantalBomen25(aantalB25);
-        const aantalGroenBl = jsonObject.filter(obj => obj.ever_green === " groenblijvend");
+        const aantalGroenBl = jsonObject.filter(obj => obj.ever_green === " evergreen");
         const aantalGroenB = aantalGroenBl.length;
         setAantalGroen(aantalGroenB);
         const aantalEetb = jsonObject.filter(obj => obj.edi_bility?.trim());
@@ -196,41 +168,6 @@ const NFTPage = () => {
         }));
         const sortedPTCounts = [...formattedPlantTypeCounts].sort((a, b) => b.value - a.value);
         setAantalType(sortedPTCounts);
-        const plantEndemicCounts = jsonObject.reduce<Record<string, number>>((acc, flor) => {
-          acc[flor.ende_mic] = (acc[flor.ende_mic] || 0) + 1;
-          return acc;        
-        }, {});
-        const formattedEndemicCounts = Object.entries(plantEndemicCounts).map(([key, value]) => ({
-          name: key,
-          value: value
-        }));
-        setAantalInheems(formattedEndemicCounts);
-        const plantEndangeredCounts = jsonObject.reduce<Record<string, number>>((acc, flor) => {
-          acc[flor.en_dangered] = (acc[flor.en_dangered] || 0) + 1;
-          return acc;        
-        }, {});
-        delete plantEndangeredCounts[" "];
-        delete plantEndangeredCounts[" lang geleden verwilderd"];
-        const formattedEndangeredCounts = Object.entries(plantEndangeredCounts).map(([key, value]) => ({
-          name: key,
-          value: value
-        }));
-        setAantalBedreigd(formattedEndangeredCounts);
-        const aantalBedr = jsonObject.filter(obj => obj.en_dangered === " bedreigd");
-        const aantalBedrei = aantalBedr.length;
-        setAantalBedreigd2(aantalBedrei);
-        const aantalEBedr = jsonObject.filter(obj => obj.en_dangered === " ernstig bedreigd");
-        const aantalEBedrei = aantalEBedr.length;
-        setAantalErnstigB(aantalEBedrei);
-        const aantalKwets = jsonObject.filter(obj => obj.en_dangered === " kwetsbaar");
-        const aantalKwetsb = aantalKwets.length;
-        setAantalKwetsbaar(aantalKwetsb);
-        const aantalGev = jsonObject.filter(obj => obj.en_dangered === " gevoelig");
-        const aantalGevoe = aantalGev.length;
-        setAantalGevoelig(aantalGevoe);
-        const aantalInhee = jsonObject.filter(obj => obj.ende_mic === " nl");
-        const aantalInhe = aantalInhee.length;
-        setAantalInh(aantalInhe);
       })
       .catch(error => console.error("Error loading flora:", error));
     };
@@ -285,9 +222,9 @@ const NFTPage = () => {
     <div className="grid grid-cols-1 gap-6 bg-white/30 p-12 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg mx-auto w-full">
       { txH && 
         <div className="grid grid-cols-6 px-3 py-2">
-          <p className="flex flex-col col-span-5 rounded-l-xl items-center justify-center gap-x-1 px-3 py-1">De resultaten worden getoond van de PlantenCollectie met adres: {txH}</p>
+          <p className="flex flex-col col-span-5 rounded-l-xl items-center justify-center gap-x-1 px-3 py-1">Results shown of Plant Collection with adres: {txH}</p>
           <button className="flex flex-col col-span-1 bg-black rounded-xl hover:bg-slate-950 text-slate-100 hover:text-white flex items-center justify-center gap-x-1 px-3 py-1 border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative" onClick={handleAPI}>
-              Burn deze collectie
+              Burn this Collection
           </button>
         </div>
       }
@@ -301,33 +238,26 @@ const NFTPage = () => {
             className="flex flex-col rounded-l-xl text-center items-center justify-center text-xs sm:text-base gap-x-1 px-1 sm:px-3 py-1 border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative" 
             name="inputtxh"
           />
-          <button onClick={handleClick2} className="bg-black rounded-r-xl hover:bg-slate-950 text-xs sm:text-base text-slate-100 hover:text-white flex items-center justify-center gap-x-1 px-1 sm:px-3 py-1 border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative">Laad PlantenCollectie uit Ingevuld Adres</button>
+          <button onClick={handleClick2} className="bg-black rounded-r-xl hover:bg-slate-950 text-xs sm:text-base text-slate-100 hover:text-white flex items-center justify-center gap-x-1 px-1 sm:px-3 py-1 border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative">Load Plant Collection from Added Adres</button>
         </div>
-        <button onClick={handleClick} className="bg-black rounded-xl hover:bg-slate-950 text-xs sm:text-base text-slate-100 hover:text-white flex items-center justify-center gap-x-1 px-1 sm:px-3 py-1 border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative">Laad PlantenCollectie uit de Connected Wallet</button>
+        <button onClick={handleClick} className="bg-black rounded-xl hover:bg-slate-950 text-xs sm:text-base text-slate-100 hover:text-white flex items-center justify-center gap-x-1 px-1 sm:px-3 py-1 border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative">Load Plant Collection from Connected Wallet</button>
       </div>
       { aantalEetbaar &&  
         <div className="relative w-full h-[200px] flex items-center bg-gray-200"> 
         <Banner2 
             plantendata0={{
               aantalPlantenSoorten: aantal as number,
-              aantalInheemseSoorten: aantalInh as number,
               aantalBoomSoorten: aantalBomen as number,
               aantalBoomSoorten25: aantalBomen25 as number,
               aantalEetbareSoorten: aantalEetbaar as number,
               aantalGroenblijvendeSoorten: aantalGroen as number,
-              aantalGevoeligeSoorten: aantalGevoelig as number,
-              aantalKwetsbareSoorten: aantalKwetsbaar as number,
-              aantalBedreigdeSoorten: aantalBedreigd2 as number,
-              aantalErnstigBedreigdeSoorten: aantalErnstigB as number,
-              biodiversiteitsScore: totalScore as number
+               biodiversiteitsScore: totalScore as number
             }}
       /></div>
       }
       { aantalEetbaar &&
         <div className="grid grid-cols-3">
-          <div className="flex flex-col items-center justify-center gap-2"><p className="">Type Planten</p><ChartPlantTypen plantendata1={aantalType as any[]} /></div>
-          <div className="flex flex-col items-center justify-center gap-2"><p className="">In-/Uitheems</p><ChartInheems plantendata2={aantalInheems as any[]} /></div>
-          <div className="flex flex-col items-center justify-center gap-2"><p className="">Kwetsbaarheid van Inheemsen</p><ChartBedreigd plantendata3={aantalBedreigd as any[]} /></div>
+          <div className="flex flex-col items-center justify-center gap-2"><p className="">Type of Plants</p><ChartPlantTypen plantendata1={aantalType as any[]} /></div>
         </div>
       }
       { aantalEetbaar && 
@@ -335,14 +265,11 @@ const NFTPage = () => {
           <table className="table-auto border-collapse border border-gray-400 w-full text-left">
             <thead>
               <tr>
-                <th className="border border-gray-300 px-2 py-2">Nr</th>
-                <th className="border border-gray-300 px-2 py-2">Latijnse naam</th>
-                <th className="border border-gray-300 px-2 py-2">Nederlandse naam</th>
-                <th className="border border-gray-300 px-2 py-2">Type plant</th>
-                <th className="border border-gray-300 px-2 py-2">Bedreigd</th>
-                <th className="border border-gray-300 px-2 py-2">Inheems</th>
+                <th className="border border-gray-300 px-2 py-2">No</th>
+                <th className="border border-gray-300 px-2 py-2">Latin Name</th>
+                <th className="border border-gray-300 px-2 py-2">english Name</th>
+                <th className="border border-gray-300 px-2 py-2">Type of Plant</th>
                 <th className="border border-gray-300 px-2 py-2">Eetbaar</th>
-                <th className="border border-gray-300 px-2 py-2">Bloemkleur</th>
                 <th className="border border-gray-300 px-2 py-2">Bloeimaanden</th>
                 <th className="border border-gray-300 px-2 py-2">Groenblijvend</th>
               </tr>
@@ -352,12 +279,9 @@ const NFTPage = () => {
                 <tr key={flor.id}>
                   <td className="border border-gray-300 px-2 py-2">{flor.id}</td>
                   <td className="border border-gray-300 px-2 py-2">{flor.latin_name}</td>
-                  <td className="border border-gray-300 px-2 py-2">{flor?.dutch_name}</td>
+                  <td className="border border-gray-300 px-2 py-2">{flor?.english_name}</td>
                   <td className="border border-gray-300 px-2 py-2">{flor?.plant_type}</td>
-                  <td className="border border-gray-300 px-2 py-2">{flor?.en_dangered}</td>
-                  <td className="border border-gray-300 px-2 py-2">{flor?.ende_mic}</td>
                   <td className="border border-gray-300 px-2 py-2">{flor?.edi_bility}</td>
-                  <td className="border border-gray-300 px-2 py-2">{flor?.flower_color}</td>
                   <td className="border border-gray-300 px-2 py-2">{flor?.flower_ing}</td>
                   <td className="border border-gray-300 px-2 py-2">{flor?.ever_green}</td>
                 </tr>

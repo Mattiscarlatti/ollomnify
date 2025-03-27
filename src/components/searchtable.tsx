@@ -16,15 +16,11 @@ const SearchTable = () => {
   const convertToFlora = (data: any): Flora => ({
     _id: data.id,
     lt_name: data.latin_name,
-    nl_name: data.dutch_name,
     eng_name: data.english_name,
     pt_type: data.plant_type,
     ed_ible: data.edi_bility,
     flow_ering: data.flower_ing,
-    flow_ercolor: data.flower_color,
     ev_ergreen: data.ever_green,
-    en_demic: data.ende_mic,
-    endang_ered: data.en_dangered,
   });
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();  
@@ -49,7 +45,7 @@ const SearchTable = () => {
       setError(err.message);
     }
   };
-  const [selectedOption, setSelectedOption] = useState("dutchnam");
+  const [selectedOption, setSelectedOption] = useState("englishnam");
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setSelectedOption(event.target.value);
   };
@@ -64,7 +60,7 @@ const SearchTable = () => {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Zoek een plant..."
+              placeholder="Find a plant species..."
               className="border-white grow"
             />
           </div>
@@ -80,17 +76,14 @@ const SearchTable = () => {
       <table className="table-auto border-collapse border border-gray-400 w-full text-left">
       <thead>
         <tr>
-          <th className="border border-gray-300 px-2 py-2">Nr</th>
-          <th className="border border-gray-300 px-2 py-2"><label><input type="radio" value="latinnam" checked={selectedOption === "latinnam"} onChange={handleChange}/> Latijnse naam</label></th>
-          <th className="border border-gray-300 px-2 py-2"><label><input type="radio" value="dutchnam" checked={selectedOption === "dutchnam"} onChange={handleChange}/> Nederlandse naam</label></th>
-          <th className="border border-gray-300 px-2 py-2">Type plant</th>
-          <th className="border border-gray-300 px-2 py-2">Bedreigd</th>
-          <th className="border border-gray-300 px-2 py-2">Inheems</th>
-          <th className="border border-gray-300 px-2 py-2">Eetbaar</th>
-          <th className="border border-gray-300 px-2 py-2">Bloemkleur</th>
-          <th className="border border-gray-300 px-2 py-2">Bloeimaanden</th>
-          <th className="border border-gray-300 px-2 py-2">Groenblijvend</th>
-          <th className="border border-gray-300 px-2 py-2">Voeg toe</th>
+          <th className="border border-gray-300 px-2 py-2">No</th>
+          <th className="border border-gray-300 px-2 py-2"><label><input type="radio" value="latinnam" checked={selectedOption === "latinnam"} onChange={handleChange}/> Latin Name</label></th>
+          <th className="border border-gray-300 px-2 py-2"><label><input type="radio" value="engnam" checked={selectedOption === "englishnam"} onChange={handleChange}/> English Name</label></th>
+          <th className="border border-gray-300 px-2 py-2">Type Plant</th>
+          <th className="border border-gray-300 px-2 py-2">Edible</th>
+          <th className="border border-gray-300 px-2 py-2">flowering Months</th>
+          <th className="border border-gray-300 px-2 py-2">Evergreen</th>
+          <th className="border border-gray-300 px-2 py-2">Add</th>
         </tr>
       </thead>
       <tbody>
@@ -98,18 +91,15 @@ const SearchTable = () => {
           <tr key={florum.id}>
             <td className="border border-gray-300 px-2 py-2">{florum.id}</td>
             <td className="border border-gray-300 px-2 py-2">{florum.latin_name}</td>
-            <td className="border border-gray-300 px-2 py-2">{florum?.dutch_name}</td>
+            <td className="border border-gray-300 px-2 py-2">{florum?.english_name}</td>
             <td className="border border-gray-300 px-2 py-2">{florum?.plant_type}</td>
-            <td className="border border-gray-300 px-2 py-2">{florum?.en_dangered}</td>
-            <td className="border border-gray-300 px-2 py-2">{florum?.ende_mic}</td>
             <td className="border border-gray-300 px-2 py-2">{florum?.edi_bility}</td>
-            <td className="border border-gray-300 px-2 py-2">{florum?.flower_color}</td>
             <td className="border border-gray-300 px-2 py-2">{florum?.flower_ing}</td>
             <td className="border border-gray-300 px-2 py-2">{florum?.ever_green}</td>
             <td className="border border-gray-300 px-2 py-2">
             <button onClick={() => {const mappedFlora = convertToFlora(florum); dispatch(addToCart(mappedFlora)); console.log("Adding to cart:", mappedFlora)}} 
               className="btn btn-outline rounded-full bg-darkText text-slate-100 px-1 py-1 text-sm flex items-center border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative">
-              toevoegen
+              add
             </button>
             </td>
           </tr>

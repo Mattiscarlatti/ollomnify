@@ -16,7 +16,7 @@ export default async function handler(
     //console.log(utxos.map(utxo => Object.keys(utxo.assets)));
     const nftUtxo = utxos.find(utxo => Object.keys(utxo.assets).includes("646ab49018d6ef8287bb0cf2ab5a9a7032a673f36cd9cfcef3cf463a506c616e74656e436f6c6c6563746965"));
       if (!nftUtxo) {
-        return res.status(404).json({ error: "Er is geen PlantenCollectie gevonden." });
+        return res.status(404).json({ error: "no Plant Collection found." });
       }
     const nftTxh = nftUtxo.txHash
     res.status(200).json(nftTxh);

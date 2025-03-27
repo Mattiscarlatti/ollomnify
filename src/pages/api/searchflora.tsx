@@ -19,15 +19,11 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
     const validColumns = {
       idd: floraTable.id,
       latinnam: floraTable.latinname,
-      dutchnam: floraTable.dutchname,
       englishnam: floraTable.englishname,
       planttyp: floraTable.planttype,
       edibilit: floraTable.edibility,
       flowerin: floraTable.flowering,
-      flowercolo: floraTable.flowercolor,
       evergree: floraTable.evergreen,
-      endemi: floraTable.endemic,
-      endangere: floraTable.endangered
     };
 
     // Get the corresponding column from floraTable
@@ -38,15 +34,11 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
     const flora = await db.select({
       id: floraTable.id,
       latin_name: floraTable.latinname,
-      dutch_name: floraTable.dutchname,
       english_name: floraTable.englishname,
       plant_type: floraTable.planttype,
       edi_bility: floraTable.edibility,
       flower_ing: floraTable.flowering,
-      flower_color: floraTable.flowercolor,
       ever_green: floraTable.evergreen,
-      ende_mic: floraTable.endemic,
-      en_dangered: floraTable.endangered
     }    
     ).from(floraTable).where(like(column, ("%" + query + "%")))
     

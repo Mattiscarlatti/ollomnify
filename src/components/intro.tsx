@@ -10,13 +10,13 @@ const Intro = () => {
     <>
       <Banner1 />
       <div>
-        <p className="text-center px-3 pt-20 pb-7 text-m sm:text-3xl text-header font-bold overline">Hoe werkt het? Een stap-voor-stap uitleg.</p>
+        <p className="text-center px-3 pt-20 pb-7 text-m sm:text-3xl text-header font-bold overline">How to use this site? A step-by-step tutorial.</p>
         <Youtube1 />
       </div>
       <div>
         <p className="px-3 pt-3 text-xl">Disclaimer:</p>
-        <p className="px-3 text-sm">De functionaliteit van deze site werkt uitsluitend op desktop en laptop computers, niet op mobiel of tablet. Een app is in ontwikkeling. Omdat er een Chrome extensie nodig is, fungeert deze site slechts volledig via de Chrome of Brave browser. De benodigde Chrome extensie betreft een blockchain wallet (bv. Eternl, Lace of Yoroi). Via deze wallet kan een plantencollectie worden vastgelegd op de blockchain. Voor blockchaintransacties moet wel een klein bedrag betaald worden (in orde van grootte van 0,3 Ada wat momenteel overeenkomt met ca. €0,20).</p>
-        <p className="pb-10 px-3 pt-3 text-xl">LET OP: OP DIT MOMENT IS DE SITE NOG SLECHTS MET WALLET IN PREPROD MODE TE GEBRUIKEN! WEBSITE IS NOG NIET GEKOPPELD AAN CARDANO MAINNET.</p>
+        <p className="px-3 text-sm">The functionality of this site only works on desktop and laptop computers, not on mobile devices. An app is in development. Since a Chrome extension is required, this site only functions completely via the Chrome or Brave browser. The required Chrome extension is a blockchain wallet (e.g. Eternl, Lace or Yoroi). Via this wallet, a plant collection can be recorded on the blockchain. For blockchain transactions, a small amount must be paid (in the order of magnitude of 0.3 Ada, which currently corresponds to approx. $0.20).</p>
+        <p className="pb-10 px-3 pt-3 text-xl">PLEASE NOTE: AT THIS TIME THE SITE CAN ONLY BE USED WITH WALLET IN PREPROD MODE! THE SITE IS NOT YET CONNECTED TO CARDANO MAINNET.</p>
       </div>
     </>
   );
