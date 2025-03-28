@@ -234,7 +234,7 @@ const NFTPage = () => {
             type="text" 
             value={inputValue} 
             onChange={(e) => setInputValue(e.target.value)} 
-            placeholder="Plaats hier adres dat verwijst naar de plantencollectie..."
+            placeholder="Input the address referring to a plant collection..."
             className="flex flex-col rounded-l-xl text-center items-center justify-center text-xs sm:text-base gap-x-1 px-1 sm:px-3 py-1 border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative" 
             name="inputtxh"
           />

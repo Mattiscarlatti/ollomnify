@@ -12,7 +12,7 @@ import 'swiper/css/navigation';
 import '@/app/css/styles.css';
 
 const Banner1 = () => (
-  <Swiper spaceBetween={50} slidesPerView={1} centeredSlides={true} navigation={true} modules={[Autoplay, Navigation]} autoplay={{ delay: 4000, }} loop={true}>
+  <Swiper spaceBetween={50} slidesPerView={1} centeredSlides={true} navigation={false} modules={[Autoplay, Navigation]} autoplay={{ delay: 4000, }} loop={true}>
     <SwiperSlide><Image src={bannerone} alt="Slide 1" /></SwiperSlide>
     <SwiperSlide><Image src={bannertwo} alt="Slide 2" /></SwiperSlide>
     <SwiperSlide><Image src={bannerthree} alt="Slide 3" /></SwiperSlide>
