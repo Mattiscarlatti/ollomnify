@@ -24,7 +24,7 @@ interface BannerProps {
     <>
         <Swiper
         centeredSlides={true}
-        navigation={true}  
+        navigation={false}  
         modules={[Autoplay, Navigation]}
         slidesPerView={1}
         autoplay={{

@@ -4,10 +4,14 @@ import { useEffect, useState } from "react";
 import { useCardano } from "@cardano-foundation/cardano-connect-with-wallet";
 import { NetworkType } from "@cardano-foundation/cardano-connect-with-wallet-core";
 import { Emulator, Lucid } from "@lucid-evolution/lucid";
+import { addToCart } from "@/redux/shoppingSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { ChartEetb } from "@/components/chartedibility";
+import { ChartBloei } from "@/components/chartflowering";
 import { ChartPlantTypen } from "@/components/chartplanttypen";
 import Banner2 from "@/components/banner2";
 import Container from "@/components/container";
-import { Flora2 } from "../../type";
+import { Flora, Flora2 } from "../../type";
 
 (BigInt.prototype as any).toJSON = function () {
   return this.toString();
@@ -55,6 +59,7 @@ const sumList = (numbers: number[]): number => {
 };
 
 const NFTPage = () => {
+  const dispatch = useDispatch();
   const [txH, setTxh] = useState("");
   const [inputValue, setInputValue] = useState<string>('');
   const [planTen, setPlanten] = useState<number[]>([]);
@@ -67,6 +72,8 @@ const NFTPage = () => {
   const [aantalGroen, setAantalGroen] = useState<number>();
   const [aantalEetbaar, setAantalEetbaar] = useState<number>();
   const [aantalType, setAantalType] = useState<{ name: string; value: number }[]>([]);
+  const [aantalBloei, setAantalBloei] = useState< { name: string; value: number}[]>([]);
+  const [aantalEet, setAantalEet] = useState< { name: string; value: number}[]>([]);
   const [error, setError] = useState('');
   const network = NetworkType.TESTNET;
   const { isConnected, usedAddresses, enabledWallet } = useCardano({
@@ -148,7 +155,7 @@ const NFTPage = () => {
         const aantalboom = jsonObject.filter(obj => obj.plant_type === " tree");
         const aantalBom = aantalboom.length;
         setAantalBomen(aantalBom);
-        const aantalBom25 = jsonObject.filter(obj => obj.latin_name.includes(" more than 25"));
+        const aantalBom25 = jsonObject.filter(obj => obj.latin_name.includes("more than 25"));
         const aantalB25 = aantalBom25.length;
         setAantalBomen25(aantalB25);
         const aantalGroenBl = jsonObject.filter(obj => obj.ever_green === " evergreen");
@@ -168,6 +175,81 @@ const NFTPage = () => {
         }));
         const sortedPTCounts = [...formattedPlantTypeCounts].sort((a, b) => b.value - a.value);
         setAantalType(sortedPTCounts);
+        const aantallen1 = jsonObject.filter(obj => obj.flower_ing.includes(" 1 "));
+        const aantalle1 = aantallen1.length;
+        const aantallen2 = jsonObject.filter(obj => obj.flower_ing.includes(" 2"));
+        const aantalle2 = aantallen2.length;
+        const aantallen3 = jsonObject.filter(obj => obj.flower_ing.includes(" 3"));
+        const aantalle3 = aantallen3.length;
+        const aantallen4 = jsonObject.filter(obj => obj.flower_ing.includes(" 4"));
+        const aantalle4 = aantallen4.length;
+        const aantallen5 = jsonObject.filter(obj => obj.flower_ing.includes(" 5"));
+        const aantalle5 = aantallen5.length;
+        const aantallen6 = jsonObject.filter(obj => obj.flower_ing.includes(" 6"));
+        const aantalle6 = aantallen6.length;
+        const aantallen7 = jsonObject.filter(obj => obj.flower_ing.includes(" 7"));
+        const aantalle7 = aantallen7.length;
+        const aantallen8 = jsonObject.filter(obj => obj.flower_ing.includes(" 8"));
+        const aantalle8 = aantallen8.length;
+        const aantallen9 = jsonObject.filter(obj => obj.flower_ing.includes(" 9"));
+        const aantalle9 = aantallen9.length;
+        const aantallen10 = jsonObject.filter(obj => obj.flower_ing.includes(" 10"));
+        const aantalle10 = aantallen10.length;
+        const aantallen11 = jsonObject.filter(obj => obj.flower_ing.includes(" 11"));
+        const aantalle11 = aantallen11.length;
+        const aantallen12 = jsonObject.filter(obj => obj.flower_ing.includes(" 12"));
+        const aantalle12 = aantallen12.length;
+        const aantallen13 = jsonObject.filter(obj => obj.flower_ing.includes(" 1"));
+        const aantalle13 = aantallen13.length;
+        const aantalle1_2 = aantalle13 - aantalle11 - aantalle12;
+        const aantallenBloei = [
+          { name: "january", value: aantalle1 },
+          { name: "february", value: aantalle2 },
+          { name: "march", value: aantalle3 },
+          { name: "april", value: aantalle4 },
+          { name: "may", value: aantalle5 },
+          { name: "june", value: aantalle6 },
+          { name: "july", value: aantalle7 },
+          { name: "august", value: aantalle8 },
+          { name: "september", value: aantalle9 },
+          { name: "october", value: aantalle10 },
+          { name: "november", value: aantalle11 },
+          { name: "december", value: aantalle12 }
+        ];
+        setAantalBloei(aantallenBloei);
+        const aantallenBlad = jsonObject.filter(obj => obj.edi_bility.includes("leafs"));
+        const aantalleBlad = aantallenBlad.length;
+        const aantallenBloem = jsonObject.filter(obj => obj.edi_bility.includes("flowers"));
+        const aantalleBloem = aantallenBloem.length;
+        const aantallenZaad = jsonObject.filter(obj => obj.edi_bility.includes("seeds"));
+        const aantalleZaad = aantallenZaad.length;
+        const aantallenJongSch = jsonObject.filter(obj => obj.edi_bility.includes("young"));
+        const aantalleJongSch = aantallenJongSch.length;
+        const aantallenStamBin = jsonObject.filter(obj => obj.edi_bility.includes("stem"));
+        const aantalleStamBin = aantallenStamBin.length;
+        const aantallenSap = jsonObject.filter(obj => obj.edi_bility.includes("juice"));
+        const aantalleSap = aantallenSap.length;
+        const aantallenVrucht = jsonObject.filter(obj => obj.edi_bility.includes("fruits"));
+        const aantalleVrucht = aantallenVrucht.length;
+        const aantallenOlie = jsonObject.filter(obj => obj.edi_bility.includes("oil"));
+        const aantalleOlie = aantallenOlie.length;
+        const aantallenWortel = jsonObject.filter(obj => obj.edi_bility.includes("roots"));
+        const aantalleWortel = aantallenWortel.length;
+        const aantallenBoon = jsonObject.filter(obj => obj.edi_bility.includes("bean"));
+        const aantalleBoon = aantallenBoon.length;
+        const aantallenEet = [
+          { name: "fruits", value: aantalleVrucht },
+          { name: "seeds", value: aantalleZaad },
+          { name: "beans", value: aantalleBoon },
+          { name: "flowers", value: aantalleBloem },
+          { name: "leafs", value: aantalleBlad },
+          { name: "roots", value: aantalleWortel },
+          { name: "juice", value: aantalleSap },
+          { name: "oil", value: aantalleOlie },
+          { name: "young sprouts", value: aantalleJongSch },
+          { name: "stem", value: aantalleStamBin }
+        ];
+        setAantalEet(aantallenEet);
       })
       .catch(error => console.error("Error loading flora:", error));
     };
@@ -217,30 +299,45 @@ const NFTPage = () => {
     }
   };
 
+  const convertToFlora = (data: any): Flora => ({
+    _id: data.id,
+    lt_name: data.latin_name,
+    eng_name: data.english_name,
+    pt_type: data.plant_type,
+    ed_ible: data.edi_bility,
+    flow_ering: data.flower_ing,
+    ev_ergreen: data.ever_green,
+  });
+
+  const handleAPI2 = (lijst: Flora2[]) => {
+    lijst.map(x => dispatch(addToCart(convertToFlora(x))));
+  };
+
   return (
     <Container>
     <div className="grid grid-cols-1 gap-6 bg-white/30 p-12 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg mx-auto w-full">
       { txH && 
-        <div className="grid grid-cols-6 px-3 py-2">
-          <p className="flex flex-col col-span-5 rounded-l-xl items-center justify-center gap-x-1 px-3 py-1">Results shown of Plant Collection with adres: {txH}</p>
-          <button className="flex flex-col col-span-1 bg-black rounded-xl hover:bg-slate-950 text-slate-100 hover:text-white flex items-center justify-center gap-x-1 px-3 py-1 border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative" onClick={handleAPI}>
-              Burn this Collection
-          </button>
+        <div className="grid grid-cols-4 px-3 py-2">
+          <p className="flex flex-col col-span-4 rounded-l-xl items-center justify-center gap-x-1 px-3 py-1">Results shown of Plant Collection with address: {txH}</p>
         </div>
       }
-      <div className="grid grid-cols-1 gap-2 gap-x-2 px-3 py-2 items-center">
-        <div className="grid grid-cols-2">
-          <input 
-            type="text" 
-            value={inputValue} 
-            onChange={(e) => setInputValue(e.target.value)} 
-            placeholder="Input the address referring to a plant collection..."
-            className="flex flex-col rounded-l-xl text-center items-center justify-center text-xs sm:text-base gap-x-1 px-1 sm:px-3 py-1 border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative" 
-            name="inputtxh"
-          />
-          <button onClick={handleClick2} className="bg-black rounded-r-xl hover:bg-slate-950 text-xs sm:text-base text-slate-100 hover:text-white flex items-center justify-center gap-x-1 px-1 sm:px-3 py-1 border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative">Load Plant Collection from Added Adres</button>
-        </div>
-        <button onClick={handleClick} className="bg-black rounded-xl hover:bg-slate-950 text-xs sm:text-base text-slate-100 hover:text-white flex items-center justify-center gap-x-1 px-1 sm:px-3 py-1 border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative">Load Plant Collection from Connected Wallet</button>
+      <div className="grid grid-cols-4 px-3 py-2 items-center">
+        <button onClick={handleClick2} className="col-span-2 bg-black rounded-l-xl hover:bg-slate-950 text-xs sm:text-base text-slate-100 hover:text-white flex items-center justify-center px-1 sm:px-3 py-1 border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative">Load Plant Collection from Added Address</button>
+        <input 
+          type="text" 
+          value={inputValue} 
+          onChange={(e) => setInputValue(e.target.value)} 
+          placeholder="Input the address that refers to the plant collection..."
+          className="flex flex-col col-span-2 rounded-r-xl text-center items-center justify-center text-xs sm:text-base px-1 sm:px-3 py-1 border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative" 
+          name="inputtxh"
+        />
+        <button onClick={handleClick} className="col-span-2 bg-black rounded-l-xl hover:bg-slate-950 text-xs sm:text-base text-slate-100 hover:text-white flex items-center justify-center gap-x-1 px-1 sm:px-3 py-1 border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative">Load Plant Collection from the Connected Wallet</button>
+        { txH && floras &&
+          <>
+            <button className="w-full col-span-1 bg-black hover:bg-slate-950 text-slate-100 hover:text-white flex items-center justify-center gap-x-1 px-3 py-1 border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative" onClick={() => handleAPI2(floras)}>add this collection</button>
+            <button className="w-full col-span-1 bg-black rounded-r-xl hover:bg-slate-950 text-slate-100 hover:text-white flex items-center justify-center gap-x-1 px-3 py-1 border-[2px] border-gray-400 hover:border-orange-600 duration-200 relative" onClick={handleAPI}>delete this collection</button>
+          </>
+        }
       </div>
       { aantalEetbaar &&  
         <div className="relative w-full h-[200px] flex items-center bg-gray-200"> 
@@ -251,13 +348,15 @@ const NFTPage = () => {
               aantalBoomSoorten25: aantalBomen25 as number,
               aantalEetbareSoorten: aantalEetbaar as number,
               aantalGroenblijvendeSoorten: aantalGroen as number,
-               biodiversiteitsScore: totalScore as number
+              biodiversiteitsScore: totalScore as number
             }}
       /></div>
       }
       { aantalEetbaar &&
         <div className="grid grid-cols-3">
-          <div className="flex flex-col items-center justify-center gap-2"><p className="">Type of Plants</p><ChartPlantTypen plantendata1={aantalType as any[]} /></div>
+          <div className="flex flex-col items-center justify-center gap-2 pb-28"><p className="">Flowering Plants</p><ChartBloei plantendata4={aantalBloei as any[]} /></div>
+          <div className="flex flex-col items-center justify-center gap-2 pb-28"><p className="">Edible Plants</p><ChartEetb plantendata5={aantalEet as any[]} /></div>
+          <div className="flex flex-col items-center justify-center gap-2 pb-28"><p className="">Type of Plants</p><ChartPlantTypen plantendata1={aantalType as any[]} /></div>
         </div>
       }
       { aantalEetbaar && 

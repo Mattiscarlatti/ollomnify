@@ -18,8 +18,8 @@ const About = () => {
           forms (e.g. bees, butterflies and birds). Many people simply love to have this around.</p>
         <p className="px-3 pb-2 text-sm"> I hope this initiative will be picked up by real estate platforms. They could add an extra selection criterium to 
           their sites (e.g. a biodiversity score ranking from 1 to 5 stars). That would allow potential buyers to select properties based on the abundancy 
-          of life in the gardens. Many potential buyers would be willing to pay extra for a paradise. Property prices of such properties probably would go 
-          up. A selection criteria might even cause a second-order-effect when people on a large scale find out that they can increase the value of 
+          of life in the gardens. Many potential buyers would be willing to pay extra for a small paradise. Property prices of such properties probably 
+          would go up. A selection criteria might even have a second-order-effect when people on a large scale find out that they can increase the value of 
           their property simply by adding more plant species to their gardens. Ultimately, that's what I hope and secretly aim for, humble as I am.</p>
       </div>
     </Container>

@@ -20,7 +20,7 @@ const WalletModal = () => {
     return (
       <div>
         <button
-          className="btn btn-outline rounded-full text-xs sm:text-base hover:text-white flex items-center justify-center gap-x-1 sm:px-3 sm:py-1 relative"
+          className="btn btn-outline rounded-full text-xs sm:text-base hover:text-white flex items-center justify-center gap-x-1 px-1 sm:px-2 relative"
           onClick={() => window.my_modal.showModal()}
         >
           {isConnected ? "CONNECTED" : "CONNECT"}
